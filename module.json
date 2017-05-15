@@ -1,0 +1,13 @@
+{
+  "readable_name": "malt.asset",
+  "dependencies": [
+    {
+      "src": "malt3d/malt_core",
+      "name": "malt_core",
+      "version": "^0.1.0"
+    }
+  ],
+  "version": "0.1.0",
+  "name": "malt_asset",
+  "components": {}
+}
