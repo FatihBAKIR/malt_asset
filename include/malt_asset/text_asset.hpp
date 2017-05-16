@@ -29,7 +29,7 @@ namespace malt {
         text_asset load(meta::type<text_asset>, asset::asset_file& f);
 
     private:
-        std::unordered_map<const char*, std::string> m_cache;
+        std::unordered_map<std::string, std::string> m_cache;
     };
 }
 

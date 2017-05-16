@@ -27,7 +27,7 @@ namespace malt
                 }
             };
 
-            template <class LoaderTs>
+            template <class... LoaderTs>
             class asset_mgr
             {
             public:
@@ -64,7 +64,7 @@ namespace malt
                 }
 
             private:
-                using loader_ts = meta::list<LoaderTs>;
+                using loader_ts = meta::list<LoaderTs...>;
                 using loaders_tuple = meta::convert_t<std::tuple, loader_ts>;
 
                 loaders_tuple loaders;
