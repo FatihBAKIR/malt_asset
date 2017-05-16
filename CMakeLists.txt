@@ -15,11 +15,16 @@ set(HEADER_FILES
         ${HEADER_PATH}/module.hpp
         ${HEADER_PATH}/assets.hpp
         ${HEADER_PATH}/asset_mgr.hpp
+        ${HEADER_PATH}/text_asset.hpp
+        ${HEADER_PATH}/asset_loader.hpp
         )
 
-set(SOURCE_FILES src/module.cpp
-        src/assets.cpp)
-add_library(malt_asset SHARED ${SOURCE_FILES})
+set(SOURCE_FILES
+        src/module.cpp
+        src/assets.cpp
+        src/text_asset.cpp)
+
+add_library(malt_asset SHARED ${SOURCE_FILES} ${HEADER_FILES})
 
 malt_def_module(malt_asset)
 

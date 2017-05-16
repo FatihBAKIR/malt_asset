@@ -1,15 +1,17 @@
 //
 // Created by fatih on 5/16/17.
 //
+#pragma once
 
 #include <malt/list.hpp>
 #include <tuple>
 #include <iostream>
 #include <malt/utilities.hpp>
+#include <malt_asset/asset_loader.hpp>
 
 namespace malt
 {
-    namespace assets
+    namespace asset
     {
         namespace detail
         {
@@ -20,7 +22,7 @@ namespace malt
                 static constexpr bool value()
                 {
                     constexpr auto res = meta::index_of_t<AssetT, typename T::types>() >= 0;
-                    static_assert(res, "");
+                    //static_assert(res, "no loader was able to load this type");
                     return res;
                 }
             };
@@ -40,15 +42,17 @@ namespace malt
                     uint8_t buf[sizeof(AssetT)];
                     AssetT* obj = reinterpret_cast<AssetT*>(buf);
 
+                    asset_file file(path);
+
                     using candidates = meta::filter_t<loadable_filter<AssetT>, loader_ts>;
                     meta::for_each(candidates{}, [&](auto* c)
                     {
                         using type = std::remove_pointer_t<decltype(c)>;
                         constexpr auto index = meta::index_of_t<type, loader_ts>();
                         auto& loader = std::get<index>(loaders);
-                        if (loader.check(meta::type<AssetT>{}))
+                        if (loader.check(meta::type<AssetT>{}, (const asset_file&)file))
                         {
-                            new (obj) AssetT(loader.load(path));
+                            new (obj) AssetT(loader.load(meta::type<AssetT>{}, file));
                         }
                     });
 
