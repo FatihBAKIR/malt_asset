@@ -13,6 +13,12 @@ namespace malt
 {
     namespace asset
     {
+        class loader_error : public std::runtime_error
+        {
+        public:
+            using std::runtime_error::runtime_error;
+        };
+
         namespace detail
         {
             template <class AssetT>
@@ -52,7 +58,14 @@ namespace malt
                         auto& loader = std::get<index>(loaders);
                         if (loader.check(meta::type<AssetT>{}, (const asset_file&)file))
                         {
-                            new (obj) AssetT(loader.load(meta::type<AssetT>{}, file));
+                            try
+                            {
+                                new (obj) AssetT(loader.load(meta::type<AssetT>{}, file));
+                            }
+                            catch (loader_error& err)
+                            {
+                                std::cerr << "loader failed, even though it said it could load it:\n  " << err.what() << '\n';
+                            }
                         }
                     });
 
