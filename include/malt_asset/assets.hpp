@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <string>
 #include <malt/engine_defs.hpp>
+#include <malt_asset/assets_def.hpp>
 
 namespace malt
 {
@@ -22,7 +23,7 @@ namespace impl
 namespace asset
 {
     template <class AssetT>
-    AssetT load(const char* path)
+    AssetT load(path_type path)
     {
         return impl::asset_adapter<AssetT>::load(path);
     }

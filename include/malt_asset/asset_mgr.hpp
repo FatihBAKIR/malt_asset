@@ -8,6 +8,7 @@
 #include <iostream>
 #include <malt/utilities.hpp>
 #include <malt_asset/asset_loader.hpp>
+#include <malt_asset/assets_def.hpp>
 
 namespace malt
 {
@@ -38,7 +39,7 @@ namespace malt
             {
             public:
                 template <class AssetT>
-                AssetT load(const char* path)
+                AssetT load(path_type path)
                 {
                     // determine the loaders that may be able to load AssetT
                     // run their predicates

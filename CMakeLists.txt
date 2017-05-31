@@ -26,6 +26,8 @@ set(SOURCE_FILES
 
 add_library(malt_asset SHARED ${SOURCE_FILES} ${HEADER_FILES})
 
+target_include_directories(malt_asset PUBLIC "C:\\MinGW\\include")
+
 malt_def_module(malt_asset)
 
 malt_add_module(malt_asset malt_core)

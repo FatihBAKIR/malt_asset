@@ -6,6 +6,7 @@
 #include <array>
 #include <fstream>
 #include <gsl/gsl_assert>
+#include <malt_asset/assets_def.hpp>
 
 namespace malt
 {
@@ -13,15 +14,16 @@ namespace malt
     {
         class asset_file
         {
-            const char* m_path;
+
+            path_type m_path;
             mutable std::ifstream m_stream;
             bool m_is_binary;
             size_t m_size;
 
         public:
-            asset_file(const char* path);
+            asset_file(path_type path);
 
-            const char* get_path() const { return m_path; }
+            path_type get_path() const { return m_path; }
 
             size_t get_size() const { return m_size; }
 
