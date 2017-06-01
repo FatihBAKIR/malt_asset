@@ -16,7 +16,7 @@ namespace impl
     template <class AssetT>
     struct asset_adapter
     {
-        static MALT_WEAK_SYMBOL AssetT load(const char* path);
+        static AssetT load(const char* path) MALT_WEAK_SYMBOL;
     };
 }
 

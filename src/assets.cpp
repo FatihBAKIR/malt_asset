@@ -12,6 +12,7 @@ namespace asset{
             m_path(path),
             m_stream(path)
     {
+        Expects(m_stream.good());
         m_stream.seekg(0, std::ios_base::end);
         m_is_binary = false;
         m_size = m_stream.tellg();

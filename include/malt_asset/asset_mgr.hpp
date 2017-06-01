@@ -65,7 +65,7 @@ namespace malt
                             }
                             catch (loader_error& err)
                             {
-                                std::cerr << "loader failed, even though it said it could load it:\n  " << err.what() << '\n';
+                                std::cerr << "fail: " << path << "\nloader failed, even though it said it could load it:\n  " << err.what() << '\n';
                             }
                         }
                     });
