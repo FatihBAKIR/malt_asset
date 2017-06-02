@@ -24,7 +24,7 @@ set(SOURCE_FILES
         src/assets.cpp
         src/text_asset.cpp)
 
-add_library(malt_asset SHARED ${SOURCE_FILES} ${HEADER_FILES})
+add_library(malt_asset ${MALT_LIB_TYPE} ${SOURCE_FILES} ${HEADER_FILES})
 
 target_include_directories(malt_asset PUBLIC "C:\\MinGW\\include")
 
