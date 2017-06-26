@@ -3,7 +3,7 @@
 //
 
 #include <malt_asset/text_asset.hpp>
-#include <malt/list.hpp>
+#include <malt/meta.hpp>
 #include <malt_asset/asset_loader.hpp>
 
 namespace malt

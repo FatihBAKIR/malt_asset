@@ -1,4 +1,4 @@
 #include<malt_asset/module.hpp>
-#include<malt/module_impl.hpp>
+#include<malt/module.hpp>
 
 MALT_IMPLEMENT_MODULE(malt_asset_def);
