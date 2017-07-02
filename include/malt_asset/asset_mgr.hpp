@@ -48,12 +48,14 @@ namespace malt
 
                     uint8_t buf[sizeof(AssetT)];
                     AssetT* obj = reinterpret_cast<AssetT*>(buf);
+                    bool is_valid = false;
 
                     asset_file file(path);
 
                     using candidates = meta::filter_t<loadable_filter<AssetT>, loader_ts>;
                     meta::for_each(candidates{}, [&](auto* c)
                     {
+                        if (is_valid) return;
                         using type = std::remove_pointer_t<decltype(c)>;
                         constexpr auto index = meta::index_of_t<type, loader_ts>();
                         auto& loader = std::get<index>(loaders);
@@ -62,6 +64,7 @@ namespace malt
                             try
                             {
                                 new (obj) AssetT(loader.load(meta::type<AssetT>{}, file));
+                                is_valid = true;
                             }
                             catch (loader_error& err)
                             {
@@ -73,6 +76,11 @@ namespace malt
                     auto x = malt::at_exit([=]{
                         obj->~AssetT();
                     });
+
+                    if (!is_valid)
+                    {
+                        throw std::runtime_error("Asset couldn't be loaded!");
+                    }
 
                     return std::move(*obj);
                 }

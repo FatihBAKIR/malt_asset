@@ -5,6 +5,8 @@
 #include <malt_asset/text_asset.hpp>
 #include <malt/meta.hpp>
 #include <malt_asset/asset_loader.hpp>
+#include <yaml-cpp/node/node.h>
+#include <malt_asset/assets.hpp>
 
 namespace malt
 {
@@ -27,6 +29,15 @@ namespace malt
         }
 
         return { it->second.c_str() };
+    }
+
+    bool txt_loader::check(meta::type<YAML::Node>, const asset::asset_file &) {
+        return true;
+    }
+
+    YAML::Node txt_loader::load(meta::type<YAML::Node>, asset::asset_file &f) {
+        auto ta = malt::asset::load<text_asset>(f.get_path());
+        return YAML::Load(ta.c_str());
     }
 }
 
