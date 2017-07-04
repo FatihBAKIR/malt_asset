@@ -5,7 +5,7 @@
 #pragma once
 
 #include <malt/meta.hpp>
-#include <malt_asset/asset_loader.hpp>
+#include <malt_asset/asset_file.hpp>
 #include <unordered_map>
 #include <yaml-cpp/yaml.h>
 

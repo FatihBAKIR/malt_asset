@@ -4,7 +4,7 @@
 
 #include <malt_asset/text_asset.hpp>
 #include <malt/meta.hpp>
-#include <malt_asset/asset_loader.hpp>
+#include <malt_asset/asset_file.hpp>
 #include <yaml-cpp/node/node.h>
 #include <malt_asset/assets.hpp>
 
@@ -37,7 +37,7 @@ namespace malt
 
     YAML::Node txt_loader::load(meta::type<YAML::Node>, asset::asset_file &f) {
         auto ta = malt::asset::load<text_asset>(f.get_path());
-        return YAML::Load(ta.c_str());
+        return YAML::Load(ta->c_str());
     }
 }
 

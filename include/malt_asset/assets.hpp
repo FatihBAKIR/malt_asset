@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <memory>
 #include <cstdint>
 #include <string>
 #include <malt/engine_defs.hpp>
@@ -11,27 +12,33 @@
 
 namespace malt
 {
-namespace impl
-{
-    template <class AssetT>
-    struct asset_adapter
+    namespace asset
     {
-        static AssetT load(const char* path) MALT_WEAK_SYMBOL;
-    };
-}
-
-namespace asset
-{
-    template <class AssetT>
-    AssetT load(path_type path)
-    {
-        return impl::asset_adapter<AssetT>::load(path);
+        template <class T>
+        using asset_ptr = std::shared_ptr<T>;
     }
 
-    template <class AssetT>
-    AssetT load(const std::string& path)
+    namespace impl
     {
-        return load<AssetT>(path.c_str());
+        template <class AssetT>
+        struct asset_adapter
+        {
+            static asset::asset_ptr<AssetT> load(const char* path) MALT_WEAK_SYMBOL;
+        };
     }
-}
+
+    namespace asset
+    {
+        template <class AssetT>
+        asset_ptr<AssetT> load(path_type path)
+        {
+            return impl::asset_adapter<AssetT>::load(path);
+        }
+
+        template <class AssetT>
+        auto load(const std::string& path)
+        {
+            return load<AssetT>(path.c_str());
+        }
+    }
 }

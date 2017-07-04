@@ -2,7 +2,7 @@
 // Created by fatih on 5/16/17.
 //
 
-#include <malt_asset/asset_loader.hpp>
+#include <malt_asset/asset_file.hpp>
 
 namespace malt
 {
