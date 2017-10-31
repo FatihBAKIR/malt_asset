@@ -16,7 +16,6 @@ set(HEADER_FILES
         ${HEADER_PATH}/assets.hpp
         ${HEADER_PATH}/asset_mgr.hpp
         ${HEADER_PATH}/text_asset.hpp
-        ${HEADER_PATH}/asset_loader.hpp
         )
 
 set(SOURCE_FILES
