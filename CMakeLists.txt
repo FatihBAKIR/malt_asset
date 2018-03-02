@@ -28,6 +28,6 @@ add_library(malt_asset ${MALT_LIB_TYPE} ${SOURCE_FILES} ${HEADER_FILES})
 
 malt_def_module(malt_asset)
 
-malt_add_module(malt_asset malt_core)
+malt_dependency(malt_asset malt_core)
 
 malt_install(malt_asset ${HEADER_PATH})
